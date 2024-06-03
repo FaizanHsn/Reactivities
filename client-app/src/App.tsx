@@ -1,17 +1,27 @@
+import { useEffect, useState } from 'react'
 import './App.css'
-import { ducks } from './demo'
+import axios from 'axios';
 
 function App() {
+  const [activities,setActivities] = useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:5000/api/activities')
+      .then(response=>{
+        setActivities(response.data)
+      })
+  },[])
+
   return (
-   <div>
-    <h1>Reactivities</h1>
-    {ducks.map(duck=> (
-      <div key={duck.name}>
-        <span>{duck.name}</span>
-        <button onClick={()=>duck.makeSound(duck.name + 'Quack')}>Make Sound</button>
-      </div>
-      ))}
-   </div>
+    <div>
+      <h1>Reactivities</h1>
+      <ul>
+        {activities.map((activity: any)=>(
+          <li key={activity.id}>
+            {activity.title}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
