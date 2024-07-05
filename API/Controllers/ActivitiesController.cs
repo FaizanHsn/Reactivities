@@ -8,11 +8,11 @@ using Persistence;
 namespace API.Controllers
 {
     public class ActivitiesController  : BaseApiController
-    {   
+    {
         private readonly IMediator _mediator;
         public ActivitiesController(IMediator mediator)
         {
-          _mediator = mediator;
+            _mediator =mediator;
         }
 
         [HttpGet]
